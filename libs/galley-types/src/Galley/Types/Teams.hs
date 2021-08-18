@@ -149,13 +149,28 @@ rolePermissions :: Role -> Permissions
 rolePermissions role = Permissions p p where p = rolePerms role
 
 permissionsRole :: Permissions -> Maybe Role
-permissionsRole (Permissions p p') | p /= p' = Nothing
+permissionsRole (Permissions p p')
+  | p /= p' =
+    -- we never did use @p /= p'@ for anything, fingers crossed that it doesn't occur anywhere
+    -- in the wild...
+    let p'' = min p p'
+     in permissionsRole (Permissions p'' p'')
 permissionsRole (Permissions p _) = permsRole p
   where
     permsRole :: Set Perm -> Maybe Role
     permsRole perms =
       Maybe.listToMaybe
-        [role | role <- [minBound ..], rolePerms role == perms]
+        [ role
+          | role <- reverse [minBound ..],
+            -- if a there is a role that is strictly less permissive than the perms set that
+            -- we encounter, we downgrade.  this shouldn't happen in real life, but it has
+            -- happened to very old users on a staging environment, where a user (probably)
+            -- was create before the current publicly visible permissions had been stabilized.
+            --
+            -- NB: the `reverse` in the line above is essential for this to not always pick
+            -- the least permissive role!
+            rolePerms role <= perms
+        ]
 
 -- | Internal function for 'rolePermissions'.  (It works iff the two sets in 'Permissions' are
 -- identical for every 'Role', otherwise it'll need to be specialized for the resp. sides.)
