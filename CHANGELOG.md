@@ -38,6 +38,7 @@
 ## Internal changes
 
 * Integration test script now displays output interactively (#1700)
+* Make mapping between (team) permissions and roles more lenient (#1711)
 
 ## Federation changes
 
