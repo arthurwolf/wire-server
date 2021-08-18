@@ -129,6 +129,7 @@ module Galley.Types.Teams
   )
 where
 
+import Control.Exception (assert)
 import Control.Lens (makeLenses, view, (^.))
 import Data.Aeson
 import Data.Id (UserId)
@@ -155,8 +156,14 @@ permissionsRole (Permissions p p')
     -- in the wild...
     let p'' = min p p'
      in permissionsRole (Permissions p'' p'')
-permissionsRole (Permissions p _) = permsRole p
+permissionsRole (Permissions p _) = assert doublecheck $ permsRole p
   where
+    -- make sure that roles are monotonous in their permission bit vectors.
+    doublecheck :: Bool
+    doublecheck = sort vectors == vectors
+      where
+        vectors = (permsToInt . rolePerms) <$> [minBound ..]
+
     permsRole :: Set Perm -> Maybe Role
     permsRole perms =
       Maybe.listToMaybe
