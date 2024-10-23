@@ -133,7 +133,7 @@
       * [ansible-authentication](src/how-to/install/ansible-authentication.md)
       * [ansible-tinc](src/how-to/install/ansible-tinc.md)
       * [aws-prod](src/how-to/install/aws-prod.md)
-      * [dependencies](src/how-to/install/dependencies.md)
+      * [Dependencies](src/how-to/install/dependencies.md)
       * [helm-prod](src/how-to/install/helm-prod.md)
       * [helm](src/how-to/install/helm.md)
       * [Installation](src/how-to/install/index.md)
