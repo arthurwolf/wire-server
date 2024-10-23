@@ -2,12 +2,27 @@
 
 ```{eval-rst}
 .. include:: includes/intro.rst
+
+
 ```
 
-This section only covers the bare minimum, for more information, see the [cassandra
-documentation](https://cassandra.apache.org/doc/latest/)
+```
+{% raw %}
+{% include "includes/intro.rst" %}
+{% endraw %}
+```
+
+This section only covers the bare minimum, for more information, see the [cassandra documentation](https://cassandra.apache.org/doc/latest/)
 
 (check-the-health-of-a-cassandra-node)=
+
+
+
+```
+{% raw %}
+{% include "includes/intro.rst" %}
+{% endraw %}
+```
 
 ## Check the health of a Cassandra node
 
@@ -38,7 +53,7 @@ UN  192.168.220.33  9.55MiB    256             100.0%             RANDOMLY-MADE-
 
 A `UN` at the begginng of the line, refers to a node that is `Up` and `Normal`.
 
-You can also check the logs of the cassandra server with 
+You can also check the logs of the cassandra server with
 
 ```
 journalctl -u cassandra.service 
