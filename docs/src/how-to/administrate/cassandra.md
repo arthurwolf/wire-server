@@ -3,14 +3,17 @@
 ```{eval-rst}
 .. include:: includes/intro.rst
 
-
 ```
 
-```
-{% raw %}
+
+```{eval-rst}
 {% include "includes/intro.rst" %}
-{% endraw %}
+
 ```
+
+
+{% include "includes/intro.rst" %}
+
 
 This section only covers the bare minimum, for more information, see the [cassandra documentation](https://cassandra.apache.org/doc/latest/)
 
@@ -18,11 +21,9 @@ This section only covers the bare minimum, for more information, see the [cassan
 
 
 
-```
-{% raw %}
+
 {% include "includes/intro.rst" %}
-{% endraw %}
-```
+
 
 ## Check the health of a Cassandra node
 
